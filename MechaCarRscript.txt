@@ -1,0 +1,150 @@
+# Laoad and install the necessary libraries
+library(tidyverse)
+if(!require(psych)){install.packages("psych")}
+if(!require(DescTools)){install.packages("DescTools")}
+library(pastecs)
+
+
+Multiple Linear Regression – MechaCar Prototypes
+
+
+# Read in the MecharCar_mpg,csv file
+MechaCar <- read.csv('MechaCar_mpg.csv') #import dataset
+
+> # Perfform Linear Regression
+> lm(spoiler.angle ~vehicle.length + vehicle.weight + ground.clearance + AWD + mpg,data=MechaCar)
+
+Call:
+lm(formula = spoiler.angle ~ vehicle.length + vehicle.weight + 
+    ground.clearance + AWD + mpg, data = MechaCar)
+
+Coefficients:
+     (Intercept)    vehicle.length    vehicle.weight  ground.clearance  
+      130.690704         -2.644211         -0.001503         -3.016781  
+             AWD               mpg  
+       -3.619387          0.344761 
+
+# Generate or calculate the summary statistics for MecharCar
+summary(lm(spoiler.angle ~ vehicle.length + vehicle.weight + ground.clearance + AWD + mpg,data=MechaCar)) 
+
+
+> # Generate or calculate the summary statistics for MecharCar
+> summary(lm(spoiler.angle ~ vehicle.length + vehicle.weight + ground.clearance + AWD + mpg,data=MechaCar)) 
+
+Call:
+lm(formula = spoiler.angle ~ vehicle.length + vehicle.weight + 
+    ground.clearance + AWD + mpg, data = MechaCar)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-49.407 -11.870   2.791  12.260  34.528 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)   
+(Intercept)      130.690704  45.858153   2.850  0.00663 **
+vehicle.length    -2.644211   2.543565  -1.040  0.30422   
+vehicle.weight    -0.001503   0.001583  -0.950  0.34741   
+ground.clearance  -3.016781   1.641326  -1.838  0.07282 . 
+AWD               -3.619387   5.765329  -0.628  0.53339   
+mpg                0.344761   0.333532   1.034  0.30694   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 19.65 on 44 degrees of freedom
+Multiple R-squared:  0.0942,	Adjusted R-squared:  -0.008736 
+F-statistic: 0.9151 on 5 and 44 DF,  p-value: 0.4801
+
+if(!require(psych)){install.packages("psych")}
+if(!require(DescTools)){install.packages("DescTools")}
+
+install.packages("pastecs")
+# Compute descriptive statistics
+library(pastecs)
+res <- stat.desc(MechaCar)
+round(res, 2)
+
+res <- stat.desc(Suspension_Coil)
+print(res)
+
+
+summary(MechaCar)
+ vehicle.length  vehicle.weight  spoiler.angle   ground.clearance    AWD           mpg 
+ Min.   :12.00   Min.   : 2000   Min.   : 0.00   Min.   : 6.00	Min.   :0.0   Min.   :10.00    
+ 1st Qu.:13.55   1st Qu.: 5038   1st Qu.:46.82   1st Qu.:11.09 	1st Qu.:0.0   1st Qu.:33.51  
+ Median :14.60   Median : 5929   Median :58.55   Median :12.98  Median :0.5   Median :43.40 
+ Mean   :15.02   Mean   : 6154   Mean   :57.12   Mean   :12.71  Mean   :0.5   Mean   :45.13 
+ 3rd Qu.:16.00   3rd Qu.: 7505   3rd Qu.:68.82   3rd Qu.:14.50  3rd Qu.:1.0   3rd Qu.:54.53 
+ Max.   :20.00   Max.   :10000   Max.   :90.00   Max.   :18.00  Max.   :1.0   Max.   :80.00 
+     
+
+Estimate Std. Error t value Pr(>|t|)> res <- stat.desc(MechaCar)
+> round(res, 2)
+		vehicle.length vehicle.weight spoiler.angle ground.clearance	AWD     mpg
+nbr.val               50.00          50.00         50.00            50.00	50.00   50.00
+nbr.null               0.00           0.00          1.00             0.00	25.00    0.00
+nbr.na                 0.00           0.00          0.00             0.00	 0.00    0.00
+min                   12.00        2000.00          0.00             6.00        0.00   10.00
+max                   20.00       10000.00         90.00            18.00	 1.00   80.00
+range                  8.00        8000.00         90.00            12.00	 1.00   70.00
+sum                  750.98      307707.37       2855.83           635.71	25.00 2256.43
+median                14.60        5928.69         58.55            12.98	 0.50   43.40
+mean                  15.02        6154.15         57.12            12.71 	 0.50   45.13
+SE.mean                0.29         261.08          2.77             0.36	 0.07    2.20
+CI.mean.0.95           0.58         524.65          5.56             0.72	 0.14    4.43
+var                    4.12     3408058.69        382.65             6.41	 0.26  242.49
+std.dev                2.03        1846.09         19.56             2.53	 0.51   15.57
+coef.var               0.14           0.30          0.34             0.20	 1.01    0.35
+
+
+ summary(Suspension_Coil)
+  VehicleID         Manufacturing_Lot       PSI      
+ Length:150         Length:150         Min.   :1463  
+ Class :character   Class :character   1st Qu.:1497  
+ Mode  :character   Mode  :character   Median :1500  
+                                       Mean   :1500  
+                                       3rd Qu.:1501  
+                                       Max.   :1536  
+				       SD     :8.731242
+				       Var    :76.23436
+
+> print(res)
+         VehicleID Manufacturing_Lot          PSI
+nbr.val         NA                NA 1.500000e+02
+nbr.null        NA                NA 0.000000e+00
+nbr.na          NA                NA 0.000000e+00
+min             NA                NA 1.463064e+03
+max             NA                NA 1.535568e+03
+range           NA                NA 7.250402e+01
+sum             NA                NA 2.249297e+05
+median          NA                NA 1.499747e+03
+mean            NA                NA 1.499531e+03
+SE.mean         NA                NA 7.129030e-01
+CI.mean         NA                NA 1.408706e+00
+var             NA                NA 7.623459e+01
+std.dev         NA                NA 8.731242e+00
+coef.var        NA                NA 5.822649e-03
+
+
+
+t.test(log10(Suspension_Coil$PSI),mu=1500)
+
+	One Sample t-test
+
+data:  log10(Suspension_Coil$PSI)
+t = -7247086, df = 149, p-value < 2.2e-16
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 3.175540 3.176356
+sample estimates:
+mean of x 
+ 3.175948 
+
+	 		
+sd(Suspension_Coil$PSI)
+[1] 8.731242
+
+> var(Suspension_Coil)
+                  VehicleID Manufacturing_Lot      PSI
+VehicleID                NA                NA       NA
+Manufacturing_Lot        NA                NA       NA
+PSI                      NA                NA 76.23436
